@@ -1,0 +1,25 @@
+{% extends "main.html" %}
+
+{% block content %}
+<div style="background-color:#f0f0f0; padding: 20px; border-radius: 10px;">
+    <h1 style="text-align: center;"> Личный кабинет {{request.user.username}}</h1>
+
+    <div> <h3><br />Имя: {{request.user.first_name}}<br /></h3></div>
+    <div> <h3><br />Фамилия: {{request.user.last_name}}<br /></h3></div>
+    <div> <h3><br />Email: {{request.user.email}}<br /></h3> </div>
+    <div> <h3><br />Дата регистрации: {{request.user.date_joined}}</h3></div>
+
+    {% if request.user.is_authenticated %}
+        <a href="{% url 'create' %}"><p style="text-align: center;"><strong>Разместить объявление</strong></p> | </a>
+        <a href="{% url 'comment_list' %}"><p style="text-align: center;"><strong>Отклики на объявления</strong></p> | </a>
+        <a href="{% url 'account_logout' %}"><p style="text-align: center;"><strong>Выйти</strong></p></a>
+    {% else %}
+        <a href="{% url 'account_login' %}" >Вход</a>   <a href="{% url 'account_signup' %}" >Регистрация</a>
+    {% endif %}
+
+    <hr>
+
+    <div align="center"><a class="main_button" href="{% url 'startpage' %}" title="На главную страницу"><h3 style="text-align: center;"><strong>На главную страницу</strong></h3></a></div>
+    <br>
+</div>
+{% endblock %}
